@@ -1,5 +1,6 @@
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GetStaticPaths } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,11 +16,18 @@ type Props = {
   };
 };
 
-const Cup: React.FC<Props> = ({ data }) => {
-  const { worldCup } = data;
+const Cup: React.FC<Props> = (params) => {
   const router = useRouter();
-  console.log(router);
+
+  // If the page is not yet generated, this will be displayed
+  // initially until getStaticProps() finishes running
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
+  const { worldCup } = params.data;
   const { year } = router.query;
+
   return (
     <>
       <Head>
@@ -57,7 +65,7 @@ const Cup: React.FC<Props> = ({ data }) => {
 
 export default Cup;
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const data = await getAllWorldCups();
 
   return {
@@ -66,12 +74,17 @@ export async function getStaticPaths() {
     }),
     fallback: true,
   };
-}
+};
 
-export async function getStaticProps({ params }: { params: { year: string } }) {
-  console.log(params);
+type ParamsType = {
+  params: {
+    year: string;
+  };
+};
+
+export const getStaticProps = async ({ params }: ParamsType) => {
   const data = await getWorldCupByYear(params.year);
   return {
     props: { data },
   };
-}
+};

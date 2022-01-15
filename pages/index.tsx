@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { getAllWorldCups } from "../services/apis";
 import { WorldCup } from "../types/WorldCup.type";
@@ -39,9 +39,9 @@ const Home: NextPage<Props> = ({ data }) => {
 
 export default Home;
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const data = await getAllWorldCups();
   return {
     props: { data },
   };
-}
+};
