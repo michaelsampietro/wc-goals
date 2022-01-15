@@ -13,7 +13,9 @@ const NavBar: React.FC = () => {
       <Link href={"/"} passHref>
         <div className="flex items-center flex-shrink-0 text-gray-600 mr-6 hover:cursor-pointer hover:bg-gray-100 rounded p-2">
           <FontAwesomeIcon icon={faFutbol} className="text-xl mx-2" />
-          <span className="font-semibold text-xl tracking-tight">Gols Copa do Mundo</span>
+          <span className="font-semibold text-xl tracking-tight">
+            Gols Copa do Mundo
+          </span>
         </div>
       </Link>
       {/* <div className="block lg:hidden">
