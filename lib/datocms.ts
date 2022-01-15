@@ -1,6 +1,6 @@
-import { GraphQLClient } from "graphql-request";
+import { GraphQLClient, RequestDocument } from "graphql-request";
 
-export function request({ query, variables }: any) {
+export function request({ query }: { query: RequestDocument }) {
   const endpoint = `https://graphql.datocms.com/`;
   const client = new GraphQLClient(endpoint, {
     headers: {
@@ -8,5 +8,5 @@ export function request({ query, variables }: any) {
       authorization: `Bearer 2d1770a4d2f741c8d8a7c3d6730d8b`,
     },
   });
-  return client.request(query, variables);
+  return client.request(query);
 }
