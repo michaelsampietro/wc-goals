@@ -22,6 +22,7 @@ export const getAllWorldCups = async () => {
           bgColor
           title
           src
+          aspectRatio
         }
       } 
   
@@ -59,6 +60,7 @@ export const getWorldCupByYear = async (year: string) => {
             bgColor
             title
             src
+            aspectRatio
           }
         } 
     

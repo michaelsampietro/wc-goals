@@ -9,6 +9,7 @@ import YouTube from "react-youtube";
 import Button from "../../components/Button";
 import { getAllWorldCups, getWorldCupByYear } from "../../services/apis";
 import { WorldCup } from "../../types/WorldCup.type";
+import { generateWorldCupName } from "../../utils/generateWorldCupName";
 
 type Props = {
   data: {
@@ -26,19 +27,14 @@ const Cup: React.FC<Props> = (params) => {
   }
 
   const { worldCup } = params.data;
-  const { year } = router.query;
 
   return (
     <>
       <Head>
-        <title>
-          Gols Copa {worldCup.year} - {worldCup.country}{" "}
-        </title>
+        <title>Gols Copa {generateWorldCupName(worldCup)}</title>
       </Head>
       <div className="container mx-auto text-center space-y-5">
-        <h1 className="text-2xl font-bold">
-          Copa {year} - {worldCup.country}
-        </h1>
+        <h1 className="text-2xl font-bold">{generateWorldCupName(worldCup)}</h1>
 
         <YouTube
           videoId={worldCup.video.providerUid}
